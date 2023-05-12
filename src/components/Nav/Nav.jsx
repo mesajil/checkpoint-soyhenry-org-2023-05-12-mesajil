@@ -11,11 +11,18 @@ IMPORTANTE
 */
 
 import "./nav.css";
-
+import { Link } from "react-router-dom";
 import React from "react";
 
 const Nav = () => {
-  return <div className="nav"></div>;
+  return <div className="nav">
+    <Link to="/">
+      <button>Home</button>
+    </Link>
+    <Link to="/celulares/create">
+      <button>Create Celular</button>
+    </Link>
+  </div>;
 };
 
 export default Nav;

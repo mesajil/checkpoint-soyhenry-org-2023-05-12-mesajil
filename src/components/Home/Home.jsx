@@ -17,15 +17,44 @@ import "./home.css";
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import mainImage from '../../img-cp2/main-image-cp2.jpg';
+import * as actions from "./../../redux/actions/index";
+import CelularCard from '../CelularCard/CelularCard'
 
 export class Home extends Component {
+
+  componentDidMount() {
+    this.props.getAllCelulares();
+  }
+
   render() {
-    return <div className="home"></div>;
+    return (<div className="home">
+      <h1>Cellphones</h1>
+      <img src={mainImage} alt={'celular-logo'} />
+      <h3>Celulares:</h3>
+      <h4>Checkpoint M2</h4>
+      {
+        this.props.celulares?.map(e => (
+          <CelularCard
+            key={e.id}
+            id={e.id}
+            marca={e.marca}
+            precio={e.precio}
+            imagen={e.imagen}
+            modelo={e.modelo}
+          />
+        ))
+      }
+    </div>);
   }
 }
 
-export const mapStateToProps = (state) => {};
+export const mapStateToProps = (state) => ({
+  celulares: state.celulares
+});
 
-export const mapDispatchToProps = (dispatch) => {};
+export const mapDispatchToProps = (dispatch) => ({
+  getAllCelulares: () => dispatch(actions.getAllCelulares())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
